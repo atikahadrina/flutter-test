@@ -13,6 +13,7 @@ class ProductController extends GetxController {
   var searchValue = ''.obs;
 
   bool get isLoading => loading.value;
+  Product? get currentProduct => productById.value;
 
   void setSearchValue(String val) {
     searchValue.value = val;
@@ -65,8 +66,13 @@ class ProductController extends GetxController {
   }
 
   Future<void> getProductById(int id) async {
+    loading.value = true;
+    productById.value = null;
+
     final Product? response = await _repository.getProductbyID(id);
+    
     productById.value = response;
+    loading.value = false;
     update();
   }
 }

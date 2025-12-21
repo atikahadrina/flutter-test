@@ -157,8 +157,14 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               ...getListToDisplay().map((product) {
+
                                 return InkWell(
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    Get.toNamed(
+                                      AppRoutes.productDetailsPage,
+                                      arguments: product.id,
+                                    );
+                                  },
                                   child: Container(
                                     width: context.maxWidth / 3.5,
                                     decoration: BoxDecoration(
