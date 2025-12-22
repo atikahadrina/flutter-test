@@ -4,6 +4,9 @@ import 'package:product_cart_app/theme/theme_extension.dart';
 class ShowSnackBar {
   static open(BuildContext context, String title,
       {Duration? duration, bool? isDismissable = true, SnackBarAction? action}) {
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    if (messenger == null) return;
+
     final snackBar = SnackBar(
       duration: duration ?? const Duration(seconds: 4),
       backgroundColor: Colors.black,
@@ -23,14 +26,14 @@ class ShowSnackBar {
               label: 'Dismiss',
               textColor: Colors.red,
               onPressed: () {
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                ScaffoldMessenger.of(context).clearSnackBars();
+                messenger.hideCurrentSnackBar();
+                messenger.clearSnackBars();
               },
             )
           : action,
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    messenger.showSnackBar(snackBar);
   }
 
   static close(BuildContext context) {
