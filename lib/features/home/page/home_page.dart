@@ -69,7 +69,9 @@ class _HomePageState extends State<HomePage> {
         appBar: CustomAppBar(title: 'Home Page', backButton: false),
         floatingActionButton: FloatingActionButton(
           backgroundColor: primaryColor,
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(AppRoutes.cartPage);
+          },
           child: Icon(Icons.shopping_cart_outlined, color: context.color.white),
         ),
         body: Padding(
@@ -94,9 +96,7 @@ class _HomePageState extends State<HomePage> {
                                 .mediumText(context)
                                 .copyWith(color: context.color.white),
                           ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
+                          SizedBox(width: 12.w),
                           SizedBox(
                             height: 40.w,
                             width: context.maxWidth / 1.5,

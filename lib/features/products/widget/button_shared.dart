@@ -4,12 +4,12 @@ import 'package:product_cart_app/common_widget/shared_widgets.dart';
 import 'package:product_cart_app/theme/app_color.dart';
 import 'package:product_cart_app/theme/theme_extension.dart';
 
-class AddToCartButton extends StatefulWidget {
+class CustomButton extends StatefulWidget {
   final String title;
   final void Function()? onTap;
   final double? paddingValue;
   final bool isFilled;
-  const AddToCartButton(
+  const CustomButton(
       {super.key,
       required this.title,
       this.onTap,
@@ -17,10 +17,10 @@ class AddToCartButton extends StatefulWidget {
       required this.isFilled});
 
   @override
-  State<AddToCartButton> createState() => _AddToCartButtonState();
+  State<CustomButton> createState() => _CustomButtonState();
 }
 
-class _AddToCartButtonState extends State<AddToCartButton> {
+class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
