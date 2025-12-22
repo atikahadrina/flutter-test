@@ -37,7 +37,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    productController.getProductList();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      productController.getProductList();
+    });
   }
 
   @override

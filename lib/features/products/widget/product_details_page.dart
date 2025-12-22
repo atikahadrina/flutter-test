@@ -24,7 +24,7 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final ProductController productController = Get.find<ProductController>();
-  final CartController cartController = Get.put(CartController());
+  final CartController cartController = Get.find<CartController>();
   final int? productId = Get.arguments as int?;
 
   @override

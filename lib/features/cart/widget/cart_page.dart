@@ -22,15 +22,9 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  final CartController cartController = Get.put(CartController());
+  final CartController cartController = Get.find<CartController>();
   final productController = Get.find<ProductController>();
   SlidableController? _activeSlidable;
-
-  @override
-  void initState() {
-    super.initState();
-    cartController.loadCart();
-  }
 
   @override
   Widget build(BuildContext context) {
