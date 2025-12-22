@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:product_cart_app/theme/app_color.dart';
 import 'package:product_cart_app/theme/app_text_styles.dart';
 import 'package:product_cart_app/theme/theme_extension.dart';
@@ -8,16 +7,14 @@ class AppTheme {
   /// Build the light theme with Lato as the base font and sizing from AppTextStyle.
   static ThemeData light(BuildContext context) {
     final styles = AppTextStyle();
-    final lato = GoogleFonts.latoTextTheme(
-      Theme.of(context).textTheme,
-    );
+    final baseTextTheme = Theme.of(context).textTheme;
 
     return ThemeData(
       brightness: Brightness.light,
       primaryColor: primaryColor,
       scaffoldBackgroundColor: context.color.white,
       canvasColor: Colors.transparent,
-      fontFamily: GoogleFonts.lato().fontFamily,
+      fontFamily: null,
       appBarTheme: AppBarTheme(
         centerTitle: true,
         backgroundColor: context.color.white,
@@ -46,7 +43,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(5),
         ),
       ),
-      textTheme: lato.copyWith(
+      textTheme: baseTextTheme.copyWith(
         bodySmall: styles.smallText(context),
         bodyMedium: styles.mediumText(context),
         bodyLarge: styles.largeText(context),
