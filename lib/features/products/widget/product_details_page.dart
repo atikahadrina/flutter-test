@@ -102,10 +102,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               PinchZoom(
-                child: Image.network(
-                  product.image ?? 'http://via.placeholder.com/350x150',
-                  height: context.maxWidth / 2,
-                  fit: BoxFit.contain,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: context.color.white,
+                  ),
+                  child: 
+                  Image.network(
+                    product.image ?? 'http://via.placeholder.com/350x150',
+                    height: context.maxWidth / 2,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               context.gap.h20,
