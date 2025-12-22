@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:product_cart_app/features/cart/widget/cart_page.dart';
 import 'package:product_cart_app/features/home/page/home_page.dart';
 import 'package:product_cart_app/features/home/page/landing_page.dart';
 import 'package:product_cart_app/features/products/widget/product_details_page.dart';
@@ -22,6 +23,12 @@ class AppPages {
       name: AppRoutes.productDetailsPage,
       page: () {
         return const ProductDetailsPage();
+      },
+    ),
+    GetPage(
+      name: AppRoutes.cartPage,
+      page: () {
+        return const CartPage();
       },
     ),
   ];
