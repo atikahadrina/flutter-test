@@ -58,6 +58,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if (productController.searchValue.value.isNotEmpty &&
+            productController.searchedProducts.isEmpty) {
+          _searchController.clear();
+          productController.clearSearch();
+        }
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Scaffold(
@@ -74,45 +79,51 @@ class _HomePageState extends State<HomePage> {
               spacing: 8.w,
               children: [
                 Container(
+                  height: 50.w,
                   width: context.maxWidth,
                   color: primaryColor,
                   padding: context.padding.a8,
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: context.padding.h20.add(context.padding.v4),
-                        height: 45.w,
-                        child: GetBuilder<ProductController>(
-                          builder: (p) {
-                            return TextField(
+                  child: GetBuilder<ProductController>(
+                    builder: (p) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Search',
+                            style: context.textStyle
+                                .mediumText(context)
+                                .copyWith(color: context.color.white),
+                          ),
+                          SizedBox(
+                            width: 12.w,
+                          ),
+                          SizedBox(
+                            height: 40.w,
+                            width: context.maxWidth / 1.5,
+                            child: TextField(
                               controller: _searchController,
                               onChanged: (val) {
                                 p.setSearchValue(val);
                               },
                               decoration: InputDecoration(
-                                labelText: 'Search',
-                                labelStyle: context.textStyle
-                                    .mediumText(context)
-                                    .copyWith(color: context.color.white),
+                                filled: true,
+                                fillColor: context.color.white,
                                 border: OutlineInputBorder(
                                   borderRadius: context.borderR.br8,
                                   borderSide: BorderSide(
-                                    color: context.color.white,
+                                    color: context.color.mediumGrey,
                                     width: 1.w,
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: context.borderR.br8,
                                   borderSide: BorderSide(
-                                    color: context.color.white,
+                                    color: context.color.mediumGrey,
                                     width: 1.w,
                                   ),
                                 ),
                                 suffixIcon: _searchController.text.isEmpty
-                                    ? Icon(
-                                        Icons.search,
-                                        color: context.color.white,
-                                      )
+                                    ? Icon(Icons.search, color: primaryColor)
                                     : NoSplashInkWell(
                                         onTap: () {
                                           _searchController.clear();
@@ -124,11 +135,11 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
 
@@ -158,7 +169,12 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               ...getListToDisplay().map((product) {
                                 return InkWell(
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    Get.toNamed(
+                                      AppRoutes.productDetailsPage,
+                                      arguments: product.id,
+                                    );
+                                  },
                                   child: Container(
                                     width: context.maxWidth / 3.5,
                                     decoration: BoxDecoration(

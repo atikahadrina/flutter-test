@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Preference {
   static String isLogin = 'isLogin';
   static String userId = 'userId';
+  static String cart = 'cart';
 
   static SharedPreferences? _prefs;
 

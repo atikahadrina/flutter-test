@@ -10,15 +10,13 @@ class ProductRepository {
     final endpoint = '$baseUrl/products';
 
     try {
-      final response =
-          await dio.get<List<dynamic>>(endpoint, options: options);
+      final response = await dio.get<List<dynamic>>(endpoint, options: options);
 
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data ?? <dynamic>[];
-        
+
         return data
-            .map((item) =>
-                Product.fromJson(item as Map<String, dynamic>))
+            .map((item) => Product.fromJson(item as Map<String, dynamic>))
             .toList();
       } else {
         throw Exception('Failed to fetch product list: ${response.data}');
@@ -32,19 +30,17 @@ class ProductRepository {
     }
   }
 
-  Future<List<Product>?> getProductsByCategory (String? category) async {
+  Future<List<Product>?> getProductsByCategory(String? category) async {
     final endpoint = '$baseUrl/products/category/$category';
 
     try {
-      final response =
-          await dio.get<List<dynamic>>(endpoint, options: options);
+      final response = await dio.get<List<dynamic>>(endpoint, options: options);
 
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data ?? <dynamic>[];
-        
+
         return data
-            .map((item) =>
-                Product.fromJson(item as Map<String, dynamic>))
+            .map((item) => Product.fromJson(item as Map<String, dynamic>))
             .toList();
       } else {
         throw Exception('Failed to fetch product list: ${response.data}');
@@ -62,8 +58,10 @@ class ProductRepository {
     final endpoint = '$baseUrl/products/$id';
 
     try {
-      final response =
-          await dio.get<Map<String, dynamic>>(endpoint, options: options);
+      final response = await dio.get<Map<String, dynamic>>(
+        endpoint,
+        options: options,
+      );
 
       if (response.statusCode == 200) {
         if (response.data == null) return null;

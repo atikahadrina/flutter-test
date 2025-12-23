@@ -96,8 +96,7 @@ class _LandingPageState extends State<LandingPage> {
                   .hugeTextBold(context)
                   .copyWith(color: context.color.white),
             ),
-            context.gap.h40,
-            context.gap.h40,
+            SizedBox(height: 80.h,),
             const LoadingWaveBlocks(),
           ],
         ),

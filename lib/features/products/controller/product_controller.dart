@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:product_cart_app/components/logger.dart';
 import 'package:product_cart_app/features/products/model/product_model.dart';
 import 'package:product_cart_app/features/products/repository/product_api.dart';
 
@@ -13,9 +14,15 @@ class ProductController extends GetxController {
   var searchValue = ''.obs;
 
   bool get isLoading => loading.value;
+  Product? get currentProduct => productById.value;
 
   void setSearchValue(String val) {
     searchValue.value = val;
+    filterProducts();
+  }
+
+  void clearSearch() {
+    searchValue.value = '';
     filterProducts();
   }
 
@@ -43,6 +50,7 @@ class ProductController extends GetxController {
 
     if (query.isEmpty) {
       searchedProducts.assignAll(products);
+      logger.i(searchedProducts.length);
     } else {
       searchedProducts.assignAll(
         products.where((product) {
@@ -50,6 +58,7 @@ class ProductController extends GetxController {
           return title.contains(query);
         }),
       );
+      logger.i(searchedProducts.length);
     }
 
     update();
@@ -65,8 +74,13 @@ class ProductController extends GetxController {
   }
 
   Future<void> getProductById(int id) async {
+    loading.value = true;
+    productById.value = null;
+
     final Product? response = await _repository.getProductbyID(id);
+    
     productById.value = response;
+    loading.value = false;
     update();
   }
 }
