@@ -1,18 +1,16 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
+import 'package:product_cart_app/common_widget/dialog/show_snackbar.dart';
 import 'package:product_cart_app/common_widget/product_image_box.dart';
-import 'package:product_cart_app/components/preferences.dart';
 import 'package:product_cart_app/custom_widget/custom_app_bar.dart';
-import 'package:product_cart_app/features/cart/model/cart_model.dart';
+import 'package:product_cart_app/features/cart/controller/cart_controller.dart';
 import 'package:product_cart_app/features/products/controller/product_controller.dart';
 import 'package:product_cart_app/features/products/model/product_model.dart';
 import 'package:product_cart_app/features/products/widget/button_shared.dart';
+import 'package:product_cart_app/routes/app_routes.dart';
 import 'package:product_cart_app/theme/app_ui_utils.dart';
 import 'package:product_cart_app/theme/theme_extension.dart';
 import 'package:shimmer/shimmer.dart';
@@ -26,6 +24,7 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final ProductController productController = Get.find<ProductController>();
+  final CartController cartController = Get.find<CartController>();
   final int? productId = Get.arguments as int?;
 
   @override
@@ -38,55 +37,15 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     }
   }
 
-  Future<List?> getCarts() async {
-    List<String>? encodedCarts = Preference.getStringList('cart');
-    if (encodedCarts != null) {
-      return encodedCarts
-          .map((encodedCart) => json.decode(encodedCart))
-          .toList();
-    } else {
-      return null;
-    }
-  }
-
-  Future<void> saveCart(Map<String, dynamic> cartData) async {
-    List<String>? encodedCarts = Preference.getStringList('cart');
-    List<Cart> updatedCarts = [];
-
-    if (encodedCarts != null) {
-      updatedCarts = encodedCarts
-          .map((encodedCart) => Cart.fromJson(json.decode(encodedCart)))
-          .toList();
-
-      bool productExists = false;
-      for (Cart cart in updatedCarts) {
-        if (cart.product?.id == cartData['product']['id']) {
-          cart.quantity += cartData['quantity'];
-          productExists = true;
-          break;
-        }
-      }
-
-      if (!productExists) {
-        updatedCarts.add(Cart.fromJson(cartData));
-      }
-    } else {
-      updatedCarts.add(Cart.fromJson(cartData));
-    }
-
-    List<String> updatedEncodedCarts = updatedCarts
-        .map((cart) => json.encode(cart.toJson()))
-        .toList();
-    await Preference.setStringList('cart', updatedEncodedCarts);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Product Details',
         action: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(AppRoutes.cartPage);
+          },
           icon: const Icon(Icons.shopping_cart_outlined),
         ),
       ),
@@ -103,11 +62,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             children: [
               PinchZoom(
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: context.color.white,
-                  ),
-                  child: 
-                  Image.network(
+                  decoration: BoxDecoration(color: context.color.white),
+                  child: Image.network(
                     product.image ?? 'http://via.placeholder.com/350x150',
                     height: context.maxWidth / 2,
                     fit: BoxFit.contain,
@@ -119,7 +75,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               context.gap.h20,
               SizedBox(
                 width: context.maxWidth / 2,
-                child: AddToCartButton(
+                child: CustomButton(
                   title: 'Add to cart',
                   isFilled: true,
                   onTap: () async {
@@ -206,27 +162,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   const SizedBox(height: 20.0),
                   SizedBox(
                     width: context.maxWidth / 2,
-                    child: AddToCartButton(
+                    child: CustomButton(
                       title: 'Add to cart',
                       isFilled: true,
                       onTap: () async {
-                        Map<String, dynamic> cardData = {
-                          'cartid': Random().nextInt(100000) + 1,
-                          'product': product.toJson(),
-                          'quantity': quantity,
-                        };
-                        await saveCart(cardData).then((value) => Get.back());
-                        Get.snackbar(
-                          'Success',
-                          'Added to cart',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.green,
-                          borderRadius: 8,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 4.2.w,
-                            vertical: 1.23.h,
-                          ),
-                          duration: const Duration(seconds: 3),
+                        await cartController.addToCart(product, quantity);
+                        Get.back();
+                        ShowSnackBar.open(
+                          context,
+                          'Successfully add to cart!',
+                          duration: const Duration(seconds: 4),
                         );
                       },
                     ),

@@ -1,27 +1,27 @@
 import 'package:product_cart_app/features/products/model/product_model.dart';
 
-class Cart {
-  final int cartid;
+class Item {
+  final int itemId;
   final Product? product;
-  num quantity;
+  int quantity;
 
-  Cart({
-    required this.cartid,
+  Item({
+    required this.itemId,
     this.product,
     required this.quantity,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'cartid': cartid,
+      'cartid': itemId,
       'product': product?.toJson(),
       'quantity': quantity,
     };
   }
 
-  factory Cart.fromJson(Map<String, dynamic> json) {
-    return Cart(
-      cartid: json['cartid'],
+  factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
+      itemId: json['cartid'],
       product:
           json["product"] != null ? Product.fromJson(json["product"]) : null,
       quantity: json['quantity'],

@@ -3,23 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Constant sizes to be used in the app (paddings, gaps, rounded corners etc.)
 class Sizes {
-  static double p2 = 2.0.w;
-  static double p4 = 4.0.w;
-  static double p8 = 8.0.w;
-  static double p12 = 12.0.w;
-  static double p16 = 16.0.w;
-  static double p20 = 20.0.w;
-  static double p24 = 24.0.w;
-  static double p28 = 28.0.w;
-  static double p32 = 32.0.w;
-  static double p36 = 36.0.w;
-  static double p40 = 40.0.w;
-  static double p48 = 48.0.w;
-  static double p64 = 64.0.w;
-  static double p80 = 80.0.w;
-  static double p100 = 100.0.w;
-  static double p120 = 120.0.w;
-  static double p140 = 140.0.w;
+  static double get p2 => 2.0.w;
+  static double get p4 => 4.0.w;
+  static double get p8 => 8.0.w;
+  static double get p12 => 12.0.w;
+  static double get p16 => 16.0.w;
+  static double get p20 => 20.0.w;
+  static double get p24 => 24.0.w;
+  static double get p28 => 28.0.w;
+  static double get p32 => 32.0.w;
+  static double get p36 => 36.0.w;
+  static double get p40 => 40.0.w;
+  static double get p48 => 48.0.w;
+  static double get p64 => 64.0.w;
+  static double get p80 => 80.0.w;
+  static double get p100 => 100.0.w;
+  static double get p120 => 120.0.w;
+  static double get p140 => 140.0.w;
 
   // static double p2h = 2.0.h;
   // static double p4h = 4.0.h;
@@ -40,24 +40,24 @@ class Sizes {
   // static double p120h = 120.0.h;
   // static double p140h = 140.0.h;
 
-  static double p2h = 2.0.w;
-  static double p4h = 4.0.w;
-  static double p8h = 8.0.w;
-  static double p12h = 12.0.w;
-  static double p16h = 16.0.w;
-  static double p20h = 20.0.w;
-  static double p24h = 24.0.w;
-  static double p28h = 28.0.w;
-  static double p30h = 30.0.w;
-  static double p32h = 32.0.w;
-  static double p36h = 36.0.w;
-  static double p40h = 40.0.w;
-  static double p48h = 48.0.w;
-  static double p64h = 64.0.w;
-  static double p80h = 80.0.w;
-  static double p100h = 100.0.w;
-  static double p120h = 120.0.w;
-  static double p140h = 140.0.w;
+  static double get p2h => 2.0.w;
+  static double get p4h => 4.0.w;
+  static double get p8h => 8.0.w;
+  static double get p12h => 12.0.w;
+  static double get p16h => 16.0.w;
+  static double get p20h => 20.0.w;
+  static double get p24h => 24.0.w;
+  static double get p28h => 28.0.w;
+  static double get p30h => 30.0.w;
+  static double get p32h => 32.0.w;
+  static double get p36h => 36.0.w;
+  static double get p40h => 40.0.w;
+  static double get p48h => 48.0.w;
+  static double get p64h => 64.0.w;
+  static double get p80h => 80.0.w;
+  static double get p100h => 100.0.w;
+  static double get p120h => 120.0.w;
+  static double get p140h => 140.0.w;
 }
 
 class AppSizes {
