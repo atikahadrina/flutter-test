@@ -129,6 +129,7 @@ class _HomePageState extends State<HomePage> {
                                     : NoSplashInkWell(
                                         onTap: () {
                                           _searchController.clear();
+                                          productController.clearSearch();
                                         },
                                         child: Icon(
                                           Icons.close,
