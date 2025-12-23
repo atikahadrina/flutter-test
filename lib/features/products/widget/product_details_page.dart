@@ -83,6 +83,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   },
                 ),
               ),
+              context.gap.h20,
+              context.gap.h20,
             ],
           ),
         );

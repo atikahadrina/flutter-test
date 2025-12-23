@@ -4,6 +4,7 @@ import 'package:product_cart_app/theme/app_color.dart';
 import 'package:product_cart_app/theme/app_ui_utils.dart';
 import 'package:product_cart_app/theme/theme_extension.dart';
 
+// ignore: must_be_immutable
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? widgets;
